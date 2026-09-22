@@ -4,8 +4,8 @@
     "description": "",
     "main": "dist/index.js",
     "scripts": {
-        "dev": "node --watch src/index.ts",
-        "dev:nodemon": "nodemon --exec node src/index.ts",
+        "dev": "tsx watch src/index.ts",
+        "dev:nodemon": "nodemon --exec tsx src/index.ts",
         "build": "tsc",
         "start": "node dist/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,15 +15,21 @@
     "license": "ISC",
     "type": "module",
     "dependencies": {
+        "@clerk/express": "^2.1.69",
         "cors": "^2.8.6",
         "dotenv": "^18.0.2",
         "express": "^5.2.1",
         "mongoose": "^9.10.1"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.19",
         "@types/express": "^5.0.6",
         "@types/node": "^26.6.2",
         "nodemon": "^3.1.14",
+        "tsx": "^4.23.15",
         "typescript": "^7.0.2"
+    },
+    "allowScripts": {
+        "esbuild@0.28.2": true
     }
 }
