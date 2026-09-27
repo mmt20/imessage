@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
         },
         profilePic: {
             type: String,
-            defult: "",
+            default: "",
         },
     },
     { timestamps: true }, // createdAt and updatedAt fields will be automatically added
