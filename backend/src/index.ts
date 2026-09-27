@@ -8,6 +8,8 @@ import path from "path";
 import job from "./lib/cron.js";
 
 import clerkWebhook from "./webhooks/clerk.webhook.js";
+import authRoutes from "./routes/auth.routes.js";
+
 const app = express();
 
 const PORT = process.env.PORT;
@@ -28,6 +30,9 @@ app.get("/health", (req, res) => {
     });
 });
 
+
+
+app.use("/api/auth", authRoutes)
 // if the public directory exists, serve static files from it, otherwise create it and then serve static files from it
 // this for production build
 if (fs.existsSync(publicDir)) {
