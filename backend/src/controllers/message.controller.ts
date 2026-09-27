@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
 import { hasImageKitConfig, uploadChatMedia } from "../lib/imagekit.js";
+import { getResverSocketId, io } from "../lib/socket.js";
 
 export async function getUsersForSidebar(req: Request, res: Response) {
     try {
@@ -107,7 +108,12 @@ export async function sendMessage(req: Request, res: Response) {
 
         await newMessage.save();
 
-        // todo: realtime integration with socket.io
+        const receverSocketId = getResverSocketId(receiverId as string);
+        //only send the message in real time if the receiver is online
+        if (receverSocketId) {
+            // io.to(socketId).emit() sends event to a specific socket
+            io.to(receverSocketId).emit("newMessage", newMessage);
+        }
 
         res.status(201).json(newMessage);
     } catch (error) {
