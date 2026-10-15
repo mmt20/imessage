@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { type PropsWithChildren, useEffect, useState } from "react";
 import { frameStyleFromUrl, getWallpaperById } from "../data/wallpapers";
 import { WallpaperContext } from "./wallpaper";
 
@@ -11,7 +11,7 @@ function readStoredWallpaperId() {
     return "sonoma-horizon";
 }
 
-export function WallpaperProvider({ children }) {
+export function WallpaperProvider({ children }: PropsWithChildren) {
     const [wallpaperId, setWallpaperIdState] = useState(readStoredWallpaperId);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export function WallpaperProvider({ children }) {
 
     const wallpaper = getWallpaperById(wallpaperId);
 
-    const setWallpaperId = (id) => {
+    const setWallpaperId = (id: string) => {
         setWallpaperIdState(id);
     };
 

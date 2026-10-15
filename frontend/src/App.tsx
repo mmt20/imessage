@@ -5,19 +5,20 @@ import { WallpaperProvider } from "./context/WallpapperContext";
 import ChatPage from "./pages/ChatPage";
 import AuthPage from "./pages/AuthPage";
 import { useAuth } from "@clerk/react";
+import PageLoader from "./components/PageLoader";
 
 function App() {
     const { isSignedIn, isLoaded } = useAuth();
     //TODO: add loading spinner
     if (!isLoaded) {
-        return <div>Loading...</div>
+        return <PageLoader />;
     }
     return (
         <ThemeProvider>
             <WallpaperProvider>
                 <Routes>
                     <Route path="/" element={isSignedIn ? <ChatPage /> : <Navigate to={"/auth"} replace />} />
-                    <Route path="/auth" element={!isSignedIn ? <AuthPage /> : <Navigate to={"/chat"} replace />} />
+                    <Route path="/auth" element={!isSignedIn ? <AuthPage /> : <Navigate to={"/"} replace />} />
                 </Routes>
             </WallpaperProvider>
         </ThemeProvider>
